@@ -22,3 +22,8 @@ for (const url of routes) {
   writeFileSync(outPath, html);
   console.log(`Prerendered: ${url} → ${outPath}`);
 }
+
+// Copy index.html as 404.html for SPA fallback on GitHub Pages
+const indexHtml = readFileSync(resolve(distDir, 'index.html'), 'utf-8');
+writeFileSync(resolve(distDir, '404.html'), indexHtml);
+console.log('Created 404.html SPA fallback');
